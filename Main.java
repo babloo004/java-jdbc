@@ -123,5 +123,31 @@ public class Main {
         do{
             System.out.println(rs.getString(2));
         }while(rs.next());
+
+        //Prepared Statement
+        //lets perform insert operation with prepared statement
+        String sqlquery = "insert into customers values(?,?,?)";
+        //placing question marks for place holders
+        PreparedStatement ps = con.prepareStatement(sqlquery);
+        //prepareStatement() accepts sql query as parameter
+        //now we need to replace the question marks with setInt() and setString() methods
+        //if the column belongs to the Integer domain we will use setInt()
+        //if the column belongs to the String(varchar) we will use setString()
+        //these  methods accepts column number (not name) and value as parameters
+
+        //in our customer table one column belongs to Integer. so we will use setInt() method
+        //in our customer table two columns belongs to varchar. so we will use setString() method
+        ps.setInt(1,5);
+        ps.setString(2,"Thrishank");
+        ps.setString(3,"Tirupathi");
+
+        //now lets execute the query
+        //for PreparedStatement execute wont take any parameter
+        ps.execute();
+
+        //the code is similar for update and delete as well
+
+        //closing the connection
+        con.close();
     }
 }
